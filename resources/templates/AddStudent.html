@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+   <meta charset="UTF-8"/>
+   <title>MyStudents-AddStudent</title>
+   <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+   <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+   <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <!-- skyscraper tiles background for the whole page. -->
+    <body th:style="'background-image:url('+@{/images/bg2.jpg}+');'"></body>
+
+    <style>
+        /* borders of page */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* menu bar - side navigation feature */
+        .menu {
+            position: fixed;
+            background-color: black;
+            opacity: 0.9;
+            overflow: visible;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        /* for the contents - links */
+        .menu a {
+            float: left;
+            padding: 14px 16px;
+            text-align: center;
+            font-size: 20px;
+            font-family:sans-serif;
+            text-decoration: none;
+            color: #818181;
+            overflow: auto;
+        }
+
+        /* centered image settings */
+        .menu-img {
+            float: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+
+        /* links right */
+        .menu-right {
+            float: right;
+        }
+        
+        /* links left */
+        .menu-left {
+            float: left;
+        }
+
+        /* the submenu */
+        .sub-menu {
+            float: left;
+            overflow: hidden;
+        }
+
+        .btn {
+            font-size: 20px;  
+            border: none;
+            outline: none;
+            color: #818181;
+            overflow: auto;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: sans-serif;
+            margin: 0;
+        }
+
+        .btn2 {
+            margin-top: 10px;
+        }
+
+        .sub-menu-content {
+            display: none;
+            position: absolute;
+            left: 0;
+            background-color: black;
+            width: 100%;
+        }
+
+        .sub-menu-content a {
+            float: left;
+            color: white;
+            text-decoration: none;
+        }
+
+        .sub-menu:hover .sub-menu-content{
+            display: block;
+        }
+
+        .menu a:hover {
+            color: red;
+        } 
+        
+        .sub-menu:hover, .btn:hover {
+            color: red;
+            background-color: white;
+        }
+
+        .main {
+            margin-top: 70px; 
+            padding: 0px 20px;
+            text-align: left;
+            position:left;
+        }
+
+        input[type=text] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+    </style>
+	
+    <!-- menu bar -->
+    <div class = "menu">
+        <!-- nigile project logo -->
+        <div class ="menu-img">
+            <img th:src="@{/images/horizon.png}" alt="logo horizon nigile" align="center" width="70" height="70">
+        </div>
+    
+        <!-- links left-->
+        <div class ="menu-left">
+            <a href="http://localhost:8080/user">Home</a>
+            <div class ="sub-menu">
+                <button class ="btn">MyCourses&darr;</button>
+                <div class="sub-menu-content">
+                    <a href="http://localhost:8080/user/myCourses">|My Courses|</a>
+                    <a href="http://localhost:8080/user/myCourses/addCourse">|Add a Course|</a>
+                    <a href="http://localhost:8080/user/myCourses/removeCourse">|Remove a Course|</a>
+                    <a href="http://localhost:8080/user/myCourses/updateCourse">|Update Course's info|</a>
+                </div>
+            </div>
+            <div class ="sub-menu">
+                <button class ="btn">MyStudents&darr;</button>
+                <div class="sub-menu-content">
+                    <a href="http://localhost:8080/user/myStudentList">|My Students|</a>
+                    <a href="http://localhost:8080/user/myStudents/addStudent">|Add a Student to the Course|</a>
+                    <a href="http://localhost:8080/user/myStudents/removeStudent">|Remove a Student from the Course|</a>
+                    <a href="http://localhost:8080/user/myStudents/updateStudent">|Update a Student's info|</a>
+                    <a href="http://localhost:8080/user/myStudents/gradeStudent">|Grade a Student|</a> 
+                    <a href="http://localhost:8080/user/myStudents">|See other Course's Students|</a>
+                </div>
+            </div>
+            <a href="http://localhost:8080/user/showStats">MyStats</a>s
+        </div>
+
+        <!-- links right-->
+        <div class ="menu-right">
+            <a href="http://localhost:8080/logout">Logout</a>
+        </div>
+    </div>
+	
+    <div class="main">
+    <h1 style="font-family: sans-serif; margin-top: 70px; color: white;"> My Students - Add a student here:</h1>
+    
+    <!-- the form -->
+    <form th:action="@{/user/myStudents/processAddStudent}" th:object="${studentForm}" method="POST" style="max-width: 600px; margin:0 auto;">
+        <div class="addstudent" style="font-family:sans-serif;">
+            
+            <!-- the studentID row -->
+            <div class="form-group">
+                <label style="color:white; "><i>StudentID: </i></label>
+                <div class="col-8">
+                    <input type="text" th:field="*{studentID}" class="form-control" autocomplete="off" required />
+                </div>
+            </div>
+
+            <!-- the studenteName row -->
+            <div class="form-group">
+                <label style="color:white; "><i>Student Name: </i></label>
+                <div class="col-8">
+                    <input type="text" th:field="*{studentName}" class="form-control" autocomplete="off" required />
+                </div>
+            </div>
+
+            <!-- the semester row -->
+            <div class="form-group">
+                <label style="color:white; "><i>Semester: </i></label>
+                <div class="col-8">
+                    <input type="text" th:field="*{semester}" class="form-control" autocomplete="off" required />
+                </div>
+            </div>
+
+            <!-- the year row -->
+            <div class="form-group">
+                <label style="color:white; "><i>Registration Year: </i></label>
+                <div class="col-8">
+                    <input type="text" th:field="*{registrationYear}" class="form-control" autocomplete="off" required />
+                </div>
+            </div>
+
+            <!-- the submit button -->
+            <div class="btn2">
+                <button type="submit" style="height:50px; width:200px; font-family: sans-serif;"><i><b>Submit</b></i></button>
+            </div>  
+        </div>
+    </form> 
+</div>  	
+</body>
+</html>

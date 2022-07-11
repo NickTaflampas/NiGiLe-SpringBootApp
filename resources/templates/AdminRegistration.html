@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Sign Up - Register</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+ 
+    <!-- skyscraper tiles background for the whole page. -->
+    <body th:style="'background-image:url('+@{images/bg.png}+');'"></body>
+
+    <style>
+        /* borders of page */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* menu bar - side navigation feature */
+        .menu {
+            height: 100%;
+            width: 300px;
+            opacity: 0.9;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: black;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        /* for the contents - links */
+        .menu a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+        }
+
+        /* mouse over navigation links -> change their color */
+        .menu a:hover{
+            color:red;
+        }
+
+        .main {
+            margin-left: 300px;
+            padding: 0px 20px 40px;
+            padding-top: 20px;
+            background-color: rgba(0, 0, 0, 0.6);   
+        }
+        
+        .btn {
+            margin-top: 20px;
+        }
+
+    </style>
+
+    <!-- menu bar -->
+    <div class ="menu" style="overflow:auto; font-family:sans-serif;">
+        <!-- nigile project logo -->
+        <img src="../static/images/nigile-logo.png" alt="Nigile logo" align="left" width="300" height="300" position="fixed" th:src="@{images/nigile-logo.png}">
+        
+        <!-- links -->
+        <a href="https://www.google.com/">Google</a>
+        <a href="https://www.cs.uoi.gr/">University Of Ioannina</a>
+    
+        <!-- sign up and login features. -->
+        <a href="http://localhost:8080/login">Login Here</a>
+        <a href="http://localhost:8080/"> Return to Homepage</a>
+    </div>
+
+    <div class="main">
+        
+        <!-- form header -->
+        <div>
+            <h2 style="font-family:sans-serif; text-align:center; color:rgb(255, 255, 255);"> Admin Registration Form - Sign Up </h2>
+        </div>
+        
+        <!-- the form -->
+        <form th:action="@{/processAdminRegistration}" th:object="${signUpForm}" method="post" style="max-width: 600px; margin:0 auto;">
+        <div class="signup" style="font-family:sans-serif;">
+            
+            <!-- the username row -->
+            <div class="form-group">
+                <label style="color:white; "><i>Username: </i></label>
+                <div class="col-8">
+                    <input type="text" th:field="*{username}" class="form-control" autocomplete="off" required />
+                </div>
+            </div>
+
+            <!-- the password row -->
+            <div class="form-group">
+                <label style="color:white; "><i>Password: </i></label>
+                <div class="col-8">
+                    <input type="password" th:field="*{password}" class="form-control" autocomplete="off" required />
+                </div>
+            </div>
+
+            <!-- the key row -->
+            <div class="form-group">
+                <label style="color:white; "><i>Key: </i></label>
+                <div class="col-8">
+                    <input type="text" th:field="*{key}" class="form-control" autocomplete="off" required />
+                </div>
+            </div>
+            
+            <!-- the submit button -->
+            <div class="btn">
+                <button type="submit">Sign Up</button>
+            </div>        
+        
+        </div>
+        </form>
+    </div>
+</body>
+</html>
